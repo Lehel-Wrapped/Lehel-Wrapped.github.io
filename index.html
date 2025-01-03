@@ -65,7 +65,7 @@
 
         .button-container {
             justify-content: center;
-            display: flex;
+            display: none;
         }
 
         .progress-button {
@@ -77,7 +77,6 @@
             position: relative;
             border: none;
             padding: 0;
-            display: none;
         }
 
         .progress-button-hitbox {
@@ -121,7 +120,7 @@
         }
 
         #text5 {
-            animation-duration: 7s;
+            animation-duration: 10s;
             margin-top: 30.3vh;
             transform: translateX(200vw);
             width: 72.9vw;
@@ -129,7 +128,7 @@
         }
 
         #text6 {
-            animation-duration: 7s;
+            animation-duration: 10s;
             margin-top: 59.2vh;
             opacity: 0%;
             display: none;
@@ -322,6 +321,28 @@
                   opacity: 100%;}
         }
 
+        @keyframes text9 {
+            0%   {}
+            7%   {transform: translateX(0px);}
+            28%  {margin-top: 30.3vh;}
+            35%  {margin-top: 210px;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 210px;}
+        }
+
+        @keyframes text10 {
+            0%   {}
+            31.5%  {opacity: 0%;
+                  margin-top: 59.2vh;}
+            38.5%  {opacity: 100%;
+                  margin-top: 57vh;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 57vh;
+                  opacity: 100%;}
+        }
+
         @keyframes progress {
             0%   {width: 0px;}
             100% {width: 17.8125vw;}
@@ -384,7 +405,7 @@
             background-color: #ffffff;
             height: 0.577vw;
             width: 0px;
-            animation-duration: 14s;
+            animation-duration: 17s;
             animation-timing-function: linear;
         }
 
@@ -449,19 +470,19 @@
         }
 
         #average-color {
-            color: #ff0000;
+            color: #706A65;
             margin-top: 500px;
             font-size: 80px;
         }
 
         #most-used-color {
-            color: #00b7ff;
+            color: #ffffff;
             margin-top: 500px;
             font-size: 80px;
         }
 
         #least-used-color {
-            color: #d9ff00;
+            color: #afafaf;
             margin-top: 500px;
             font-size: 80px;
         }
@@ -658,6 +679,8 @@
             font-size: 16px;
             color: #ffffff;
             mix-blend-mode: difference;
+            font-weight: normal;
+
         }
         
         #message {
@@ -665,9 +688,136 @@
             top: 59px;
             left: 34px;
             display: none;
-            font-family: "GG Sans", sans-serif;
+            font-family: "GG Sans", "Segoe UI Emoji", sans-serif;
         }
 
+        .audio-player {
+            display: none;
+            align-items: center;
+            position: absolute;
+            background-color: #ffffff2b;
+            border-radius: 30px;
+            padding: 10px 20px;
+            gap: 15px;
+            width: 335px;
+            left: 100px;
+            top: 105px;
+        }
+
+        .play-button {
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #5C67E4;
+            z-index: -1;
+        }
+
+        .progress-container {
+            position: relative;
+            flex-grow: 1;
+            height: 5px;
+            background-color: #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: #5C67E4;
+            transition: width 0.1s;
+        }
+
+        .time {
+            font-size: 12px;
+            color: #ffffff;
+        }
+
+        .volume-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .volume-icon {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .volume-slider {
+            position: absolute;
+            bottom: 30px;
+            left: 39%;
+            transform: translateX(-50%);
+            display: none;
+            width: 6px;
+            height: 80px;
+            background: #ffffff4d;
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer;
+            border: rgba(255, 255, 255, 0.301) solid 4px;
+            z-index: 2;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            background: #4752C4;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 10px;
+            height: 10px;
+            background: #4752C4;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .volume-container:hover .volume-slider {
+            display: block;
+        }
+
+        .volume-container:hover .volume-hitbox {
+            display: block;
+        }
+
+        .volume-hitbox {
+            position: absolute;
+            width: 30px;
+            height: 120px;
+            bottom: 10px;
+            left: calc(50% - 15px);
+            background: transparent;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -678,30 +828,30 @@
         <div id="text2" class="thin-text">Eljött az év vége. Nézzük hogyan sikerült. Készen állsz?</div>
         <div id="text3" class="bold-text">Rohan az idő</div>
         <div id="text4" class="thin-text">Szerencsére jegyzeteltünk</div>
-        <div id="text5" class="bold-text">Idén a lehetséges 365 napi képből X képet sikerült beküldened.</div>
-        <div id="text6" class="thin-text">Ezzel többet küldtél be mint kb. <div style="font-family: Century Gothic; font-weight: 500; margin: 0 10px 0 10px;">8 193 188 600</div> ember. <div style="position: absolute; margin-top: 45px;">wow</div></div>
+        <div id="text5" class="bold-text">Idén a lehetséges 365 napi képből 366 képet sikerült beküldened.</div>
+        <div id="text6" class="thin-text"><div style="font-family: Century Gothic; font-weight: 500; margin: 0 10px 0 10px;">Huh?</div> ezt hogy?</div>
         <div id="image1-container">
-            <div style="position: absolute; background-color: red; height: 350px; aspect-ratio: 1 / 1;"></div>
+            <div style="position: absolute; background-color: #706A65; height: 350px; aspect-ratio: 1 / 1;"></div>
             <img id="image1" src="https://i.imgur.com/raQw2CU.png">
-            <div id="average-color" class="bold-text">#ff0000</div>
+            <div id="average-color" class="bold-text">#706A65</div>
         </div>
         <div id="text7" class="bold-text">Ez volt a képeid átlagos színe.</div>
         <div id="text8" class="thin-text"><div style="font-family: Century Gothic; font-weight: 500; margin: 0 10px 0 0;">Szürke</div>... huh... Igazából erre számíthattunk volna.</div>
         <div id="image2-container">
-            <div style="position: absolute; background-color: #00b7ff; height: 350px; aspect-ratio: 1 / 1;"></div>
+            <div style="position: absolute; background-color: #ffffff; height: 350px; aspect-ratio: 1 / 1;"></div>
             <img id="image1" src="https://i.imgur.com/raQw2CU.png">
-            <div id="most-used-color" class="bold-text">#00b7ff</div>
+            <div id="most-used-color" class="bold-text">#ffffff</div>
         </div>
         <div id="text9" class="bold-text">A leghasználtabb színed</div>
         <div id="text10" class="thin-text">Megértem miért tetszik ennyire.</div>
         <div id="image3-container">
-            <div style="position: absolute; background-color: #d9ff00; height: 350px; aspect-ratio: 1 / 1;"></div>
+            <img style="height: 350px; position: absolute;" id="image1" src="https://lehel-wrapped.github.io/Lehel%20least%20used.png">
             <img id="image1" src="https://i.imgur.com/raQw2CU.png">
-            <div id="least-used-color" class="bold-text">#d9ff00</div>
+            <div id="least-used-color" class="bold-text">25 Szín</div>
         </div>
-        <div id="text11" class="bold-text">A legkevésbé használt szined</div>
-        <div id="text12" class="thin-text">Szép szín, nem értem miért nem szereted.</div>
-        <div id="text13" class="bold-text">A képeid közül X képernyőkép és X fotó</div>
+        <div id="text11" class="bold-text">A legkevésbé használt szineid</div>
+        <div id="text12" class="thin-text">Mind egyszer jelent meg a képeidben.</div>
+        <div id="text13" class="bold-text">A képeid közül 96 képernyőkép és 270 fotó</div>
         <div id="text14" class="thin-text">Ez egy csodálatos arány</div>
         <div id="text15" class="bold-text">Tekintsük meg a képeket!</div>
         <div id="text16" class="thin-text">Erre vártunk egész évben.</div>
@@ -724,6 +874,28 @@
         </div>
     </div>
 
+    <div class="audio-player">
+        <button class="play-button" id="play-button">
+          <svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="90 -960 800 960" width="50px" fill="#e8eaed">
+            <path d="M340-238.39v-487.68l383.07 243.84L340-238.39Z"/>
+          </svg>
+        </button>
+        <div class="progress-container" id="audio-progress-container">
+          <div class="progress-bar" id="audio-progress-bar"></div>
+        </div>
+        <span class="time" id="time-elapsed">0:30</span>
+        <div class="volume-container">
+          <svg id="volume-icon" class="volume-icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed">
+            <path d="M571.3-123.65v-69.47q96.44-28.45 158.22-107.66Q791.3-380 791.3-481t-61.28-180.72q-61.28-79.71-158.72-107.16v-69.47q126.4 28.43 206.31 128.26 79.91 99.83 79.91 229.09t-79.91 229.09Q697.7-152.08 571.3-123.65ZM102.48-345.87V-614.7h168.48L491.3-834.48v708.96L270.96-345.87H102.48Zm448.82 38.96v-347.18q56.7 18.7 91.46 66.31 34.76 47.61 34.76 107.82 0 59.22-35.26 107.07-35.26 47.85-90.96 65.98Z"/>
+          </svg>
+          <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider" id="volume-slider" orient="vertical">
+          <div class="volume-hitbox" id="volumeHitbox"></div>
+        </div>
+      </div>
+    
+      <audio id="audio" src="https://lehel-wrapped.github.io/100.ogg"></audio>
+    
+    
     <div class="button-container">
         <div onclick="Button1()" class="progress-button-hitbox"><button class="progress-button"><div id="progress1"></div></button></div>
         <div onclick="Button2()" class="progress-button-hitbox"><button class="progress-button"><div id="progress2"></div></button></div>
@@ -772,13 +944,14 @@
         const body = document.body;
         const Canvas = document.getElementById('canvas');
         const ImageViewerItems = document.querySelectorAll('.image-viewer-container');
+        const audioPlayer = document.querySelector('.audio-player');
 
         function Start() {
             StartButton.style.display = "none";
-            const Buttons = document.querySelectorAll('.progress-button');
+            const Buttons = document.querySelectorAll('.button-container');
 
             Buttons.forEach(Button => {
-                Button.style.display = 'block';
+                Button.style.display = 'flex';
             });
             Button1();
         }
@@ -886,9 +1059,9 @@
         });
 
         progress2.style.animationName = "progress";
-        text5.style.animationName = "text3";
+        text5.style.animationName = "text9";
         text5.style.display = "block";
-        text6.style.animationName = "text4";
+        text6.style.animationName = "text10";
         text6.style.display = "flex";
         
         Button2Timer = setTimeout(() => {
@@ -902,7 +1075,7 @@
             text8.style.display = "flex";
             image1container.style.animationName = "image1";
             image1container.style.display = "flex";
-        }, 7000);
+        }, 10000);
 
         Button2Timer2 = setTimeout(() => {
             text7.style.animationName = "none";
@@ -912,7 +1085,7 @@
             image1container.style.animationName = "none";
             image1container.style.display = "none";
             Button3();
-        }, 14000);
+        }, 17000);
         }
 
         function Button3() {
@@ -1295,6 +1468,102 @@
         interactionEnabled = false;
         }
 
+//////////AUDIO PLAYER//////////
+
+        const audio = document.getElementById('audio');
+        const PlayButton = document.getElementById('play-button');
+        const AudioProgressContainer = document.getElementById('audio-progress-container');
+        const AudioProgressBar = document.getElementById('audio-progress-bar');
+        const TimeElapsed = document.getElementById('time-elapsed');
+        const VolumeSlider = document.getElementById('volume-slider');
+        const VolumeIcon = document.getElementById('volume-icon');
+    
+        PlayButton.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            PlayButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed">
+                <path d="M556.54-220v-520h160.77v520H556.54Zm-313.85 0v-520h161.16v520H242.69Z"/>
+            </svg>
+            `;
+        } else {
+            audio.pause();
+            PlayButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="90 -960 800 960" width="48px" fill="#e8eaed">
+                <path d="M340-238.39v-487.68l383.07 243.84L340-238.39Z"/>
+            </svg>
+            `;
+        }
+        });
+    
+        audio.addEventListener('timeupdate', () => {
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        AudioProgressBar.style.width = `${progressPercent}%`;
+
+        let currentTime = audio.currentTime;
+        
+        if (audio.currentTime >= audio.duration) {
+            currentTime = audio.duration + 1;
+        }
+
+        const minutes = Math.floor(currentTime / 60);
+        const seconds = Math.floor(currentTime % 60).toString().padStart(2, '0');
+        TimeElapsed.textContent = `${minutes}:${seconds}`;
+        });
+
+    
+        AudioProgressContainer.addEventListener('click', (e) => {
+        const clickX = e.offsetX;
+        const width = AudioProgressContainer.clientWidth;
+        const newTime = (clickX / width) * audio.duration;
+        audio.currentTime = newTime;
+        });
+    
+        audio.addEventListener('ended', () => {
+        PlayButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed">
+            <path d="M340-238.39v-487.68l383.07 243.84L340-238.39Z"/>
+            </svg>
+        `;
+        });
+    
+        VolumeSlider.addEventListener('input', (e) => {
+        audio.volume = e.target.value;
+    
+        if (audio.volume > 0) {
+            VolumeIcon.innerHTML = `
+            <path d="M571.3-123.65v-69.47q96.44-28.45 158.22-107.66Q791.3-380 791.3-481t-61.28-180.72q-61.28-79.71-158.72-107.16v-69.47q126.4 28.43 206.31 128.26 79.91 99.83 79.91 229.09t-79.91 229.09Q697.7-152.08 571.3-123.65ZM102.48-345.87V-614.7h168.48L491.3-834.48v708.96L270.96-345.87H102.48Zm448.82 38.96v-347.18q56.7 18.7 91.46 66.31 34.76 47.61 34.76 107.82 0 59.22-35.26 107.07-35.26 47.85-90.96 65.98Z"/>
+            `;
+        }
+        });
+    
+        VolumeIcon.addEventListener('click', () => {
+        if (audio.volume > 0) {
+            audio.volume = 0;
+            VolumeSlider.value = 0;
+            VolumeIcon.innerHTML = `
+            <path d="m817.52-42.43-133.13-133.7q-26.3 18.3-56.82 31.67-30.53 13.37-63.83 20.81V-193q19.04-5.87 37.72-12.96 18.67-7.08 34.84-19.39L483.74-380.04v254.52L263.96-345.87H95.48V-614.7h156.56l-217.17-220 46.96-46.95L865.04-90.96l-47.52 48.53Zm-25.26-241.05-47.52-48.65q20-33.44 29.5-71.15 9.5-37.72 9.5-77.72 0-103-60.57-184.22Q662.61-746.43 563.74-769v-69.35Q690-809.78 770.26-710.02q80.26 99.76 80.26 229.02 0 52.7-14.85 102.83-14.84 50.13-43.41 94.69ZM658.83-418.04l-95.09-96.22v-132.83q48.7 23.13 77.74 68.26 29.04 45.13 29.04 98.83 0 16.13-3.06 31.76-3.07 15.63-8.63 30.2ZM483.74-595.39l-118.7-120.39 118.7-118.7v239.09Z"/>
+            `;
+        } else {
+            audio.volume = 1;
+            VolumeSlider.value = 1;
+            VolumeIcon.innerHTML = `
+            <path d="M571.3-123.65v-69.47q96.44-28.45 158.22-107.66Q791.3-380 791.3-481t-61.28-180.72q-61.28-79.71-158.72-107.16v-69.47q126.4 28.43 206.31 128.26 79.91 99.83 79.91 229.09t-79.91 229.09Q697.7-152.08 571.3-123.65ZM102.48-345.87V-614.7h168.48L491.3-834.48v708.96L270.96-345.87H102.48Zm448.82 38.96v-347.18q56.7 18.7 91.46 66.31 34.76 47.61 34.76 107.82 0 59.22-35.26 107.07-35.26 47.85-90.96 65.98Z"/>
+            `;
+        }
+        });
+
+
+        const audioElement = document.getElementById('audio');
+
+        const observer = new MutationObserver(() => {
+        if (window.getComputedStyle(audioPlayer).display === 'none') {
+            audioElement.pause();
+        }
+        });
+
+        observer.observe(audioPlayer, { attributes: true, attributeFilter: ['style'] });
+        
 //////////IMAGE VIEWER//////////
 
         const images = [
@@ -1318,6 +1587,345 @@
                     "https://imgur.com/GZ7gFcH.jpg",
                     "https://imgur.com/UIi9VRv.jpg",
                     "https://imgur.com/GH4K6us.jpg",
+                    "https://imgur.com/f5rIRHL.jpg",
+                    "https://imgur.com/Hr8q40w.jpg",
+                    "https://imgur.com/NJWyaby.jpg",
+                    "https://imgur.com/Y8GX9KM.jpg",
+                    "https://imgur.com/3Ou8ANz.jpg",
+                    "https://imgur.com/RznP1Mr.jpg",
+                    "https://imgur.com/ioniToh.jpg",
+                    "https://imgur.com/dPcqVS1.jpg",
+                    "https://imgur.com/4hLpzjH.jpg",
+                    "https://imgur.com/cST8bt8.jpg",
+                    "https://imgur.com/88anDlX.jpg",
+                    "https://imgur.com/xQs3uCw.jpg",
+                    "https://imgur.com/tvxKx1d.jpg",
+                    "https://imgur.com/ZyOSrYo.jpg",
+                    "https://imgur.com/EIo0T6K.jpg",
+                    "https://imgur.com/OdMA9pA.jpg",
+                    "https://imgur.com/LVLrK1n.jpg",
+                    "https://imgur.com/ELCqb9v.jpg",
+                    "https://imgur.com/lMPZUGl.jpg",
+                    "https://imgur.com/zxOlOf0.jpg",
+                    "https://imgur.com/P6rFiMe.jpg",
+                    "https://imgur.com/023YfKT.jpg",
+                    "https://imgur.com/L5w5Kht.jpg",
+                    "https://imgur.com/Vmn18WQ.jpg",
+                    "https://imgur.com/3GP1LjB.jpg",
+                    "https://imgur.com/o7ztijG.jpg",
+                    "https://imgur.com/2ZjVOf5.jpg",
+                    "https://imgur.com/ChriFjI.jpg",
+                    "https://imgur.com/Zur3bib.jpg",
+                    "https://imgur.com/yRpTK1k.jpg",
+                    "https://imgur.com/8eT9tPR.jpg",
+                    "https://imgur.com/Udyiary.jpg",
+                    "https://imgur.com/K58H8Qw.jpg",
+                    "https://imgur.com/xF5lPjV.jpg",
+                    "https://imgur.com/sGilGyo.jpg",
+                    "https://imgur.com/iyL4T69.jpg",
+                    "https://imgur.com/lAdyYE1.jpg",
+                    "https://imgur.com/LHyxoNw.jpg",
+                    "https://imgur.com/XVBHIv5.jpg",
+                    "https://imgur.com/yDoxzuC.jpg",
+                    "https://imgur.com/frsG0eV.jpg",
+                    "https://imgur.com/i2J5DKs.jpg",
+                    "https://imgur.com/9XqR34Q.jpg",
+                    "https://imgur.com/Vxudu8b.jpg",
+                    "https://imgur.com/n1nxsnH.jpg",
+                    "https://imgur.com/uPWMqDZ.jpg",
+                    "https://imgur.com/QxigDjy.jpg",
+                    "https://imgur.com/e1tCMV8.jpg",
+                    "https://imgur.com/iXzHGU6.jpg",
+                    "https://imgur.com/9pGQA3b.jpg",
+                    "https://imgur.com/2Ohpi93.jpg",
+                    "https://imgur.com/wSjGatF.jpg",
+                    "https://imgur.com/ih78vCC.jpg",
+                    "https://imgur.com/W24QBFC.jpg",
+                    "https://imgur.com/qkOsVXn.jpg",
+                    "https://imgur.com/HrmRLc1.jpg",
+                    "https://imgur.com/KD0NaDF.jpg",
+                    "https://imgur.com/abwOxKL.jpg",
+                    "https://imgur.com/tGQL5qg.jpg",
+                    "https://imgur.com/tqFaLx1.jpg",
+                    "https://imgur.com/67LkeLu.jpg",
+                    "https://imgur.com/WZY3rq2.jpg",
+                    "https://imgur.com/Hn96RVx.jpg",
+                    "https://imgur.com/eT0afkH.jpg",
+                    "https://imgur.com/ySLxRka.jpg",
+                    "https://imgur.com/3B689Nb.jpg",
+                    "https://imgur.com/Q1VcjIE.jpg",
+                    "https://imgur.com/xftt8L0.jpg",
+                    "https://imgur.com/Wr4A93y.jpg",
+                    "https://imgur.com/Q3eOBca.jpg",
+                    "https://imgur.com/asjpBlH.jpg",
+                    "https://imgur.com/8QECgID.jpg",
+                    "https://imgur.com/fVOXqF2.jpg",
+                    "https://imgur.com/xsEWGwb.jpg",
+                    "https://imgur.com/PpKaCcW.jpg",
+                    "https://imgur.com/Eu7ope7.jpg",
+                    "https://imgur.com/c95FrCM.jpg",
+                    "https://imgur.com/fUARR5j.jpg",
+                    "https://imgur.com/GYcVeYI.jpg",
+                    "https://imgur.com/JpuhjHX.jpg",
+                    "https://imgur.com/a8RDXYc.jpg",
+                    "https://imgur.com/FU5s8Ai.jpg",
+                    "https://imgur.com/dTZAgW4.jpg",
+                    "https://imgur.com/xsUg0YE.jpg",
+                    "https://imgur.com/YT6xjyy.jpg",
+                    "https://imgur.com/coZ26AL.jpg",
+                    "https://imgur.com/SGTiOAL.jpg",
+                    "https://imgur.com/hbgvrfU.jpg",
+                    "https://imgur.com/Zcpuyi8.jpg",
+                    "https://imgur.com/umapT1h.jpg",
+                    "https://imgur.com/TplNxZ6.jpg",
+                    "https://imgur.com/ADUIdar.jpg",
+                    "https://imgur.com/qdhtLuG.jpg",
+                    "https://imgur.com/vVXh0aE.jpg",
+                    "https://imgur.com/dwXMYWv.jpg",
+                    "https://imgur.com/4q9pXYo.jpg",
+                    "https://imgur.com/OdDDJvs.jpg",
+                    "https://imgur.com/cTiAv7y.jpg",
+                    "https://imgur.com/9ueGC9Z.jpg",
+                    "https://imgur.com/LVSysku.jpg",
+                    "https://imgur.com/DnLYjjl.jpg",
+                    "https://imgur.com/JArrjRU.jpg",
+                    "https://imgur.com/nrjIZBC.jpg",
+                    "https://imgur.com/YJMrlQT.jpg",
+                    "https://imgur.com/45XQGSZ.jpg",
+                    "https://imgur.com/qgy34i7.jpg",
+                    "https://imgur.com/wyfjxsQ.jpg",
+                    "https://imgur.com/KXiudem.jpg",
+                    "https://imgur.com/9RIq0J4.jpg",
+                    "https://imgur.com/u4qWrIO.jpg",
+                    "https://imgur.com/ZPVOyDy.jpg",
+                    "https://imgur.com/FQPlFUh.jpg",
+                    "https://imgur.com/htT7jsc.jpg",
+                    "https://imgur.com/B5dPdF3.jpg",
+                    "https://imgur.com/emEpcws.jpg",
+                    "https://imgur.com/APu6ktz.jpg",
+                    "https://imgur.com/6YFz7KD.jpg",
+                    "https://imgur.com/1jAgvm6.jpg",
+                    "https://imgur.com/yciq88l.jpg",
+                    "https://imgur.com/JHO45ht.jpg",
+                    "https://imgur.com/tPIOt73.jpg",
+                    "https://imgur.com/7Uzdmmt.jpg",
+                    "https://imgur.com/LFB9GQU.jpg",
+                    "https://imgur.com/F87WnV8.jpg",
+                    "https://imgur.com/3JSP3Y6.jpg",
+                    "https://imgur.com/iLkS5br.jpg",
+                    "https://imgur.com/OWu2Zlp.jpg",
+                    "https://imgur.com/Rx3eBJn.jpg",
+                    "https://imgur.com/eaQCJUs.jpg",
+                    "https://imgur.com/2YAUNjN.jpg",
+                    "https://imgur.com/JPOYpoz.jpg",
+                    "https://imgur.com/dEEZheI.jpg",
+                    "https://imgur.com/100Oz6P.jpg",
+                    "https://imgur.com/KhFMCw8.jpg",
+                    "https://imgur.com/9eIfb9w.jpg",
+                    "https://imgur.com/Cyc4EXl.jpg",
+                    "https://imgur.com/AKEffas.jpg",
+                    "https://imgur.com/HHrovKp.jpg",
+                    "https://imgur.com/fCGOFpa.jpg",
+                    "https://imgur.com/OUAXWYD.jpg",
+                    "https://imgur.com/vY9c2Bl.jpg",
+                    "https://imgur.com/PbxwIdD.jpg",
+                    "https://imgur.com/RHGJSvu.jpg",
+                    "https://imgur.com/BvKqWAO.jpg",
+                    "https://imgur.com/90C4FAx.jpg",
+                    "https://imgur.com/Th3eCL1.jpg",
+                    "https://imgur.com/WEAhb2N.jpg",
+                    "https://imgur.com/TifEKLj.jpg",
+                    "https://imgur.com/Ggoqh4B.jpg",
+                    "https://imgur.com/n57l9S8.jpg",
+                    "https://imgur.com/ELAOpAb.jpg",
+                    "https://imgur.com/tIg3lVh.jpg",
+                    "https://imgur.com/LfuFk0s.jpg",
+                    "https://imgur.com/dVZw6Yq.jpg",
+                    "https://imgur.com/yFRjXPG.jpg",
+                    "https://imgur.com/sIp0U9P.jpg",
+                    "https://imgur.com/83yGH41.jpg",
+                    "https://imgur.com/B3saG6I.jpg",
+                    "https://imgur.com/cUZIvOc.jpg",
+                    "https://imgur.com/sglqNWF.jpg",
+                    "https://imgur.com/lScAAy7.jpg",
+                    "https://imgur.com/C5SG7uZ.jpg",
+                    "https://imgur.com/aHD1UlD.jpg",
+                    "https://imgur.com/EAyAfOj.jpg",
+                    "https://imgur.com/GJnhPud.jpg",
+                    "https://imgur.com/VjllsU2.jpg",
+                    "https://imgur.com/l38zcZk.jpg",
+                    "https://imgur.com/vxp1KZq.jpg",
+                    "https://imgur.com/1nFCKc5.jpg",
+                    "https://imgur.com/UZR0e52.jpg",
+                    "https://imgur.com/ISJ61gS.jpg",
+                    "https://imgur.com/1OtcDcq.jpg",
+                    "https://imgur.com/967cj48.jpg",
+                    "https://imgur.com/tfVQMcu.jpg",
+                    "https://imgur.com/Ry8aXQS.jpg",
+                    "https://imgur.com/U9XBtCe.jpg",
+                    "https://imgur.com/KlY5llx.jpg",
+                    "https://imgur.com/Qeo5fZs.jpg",
+                    "https://imgur.com/58OguKP.jpg",
+                    "https://imgur.com/BKzlF4n.jpg",
+                    "https://imgur.com/S6fUHX1.jpg",
+                    "https://imgur.com/A4uk3n3.jpg",
+                    "https://imgur.com/tLyAQuZ.jpg",
+                    "https://imgur.com/193P1xZ.jpg",
+                    "https://imgur.com/YbOLgMT.jpg",
+                    "https://imgur.com/bugQ2lt.jpg",
+                    "https://imgur.com/ewEJD3x.jpg",
+                    "https://imgur.com/lA8b186.jpg",
+                    "https://imgur.com/f4nRsWI.jpg",
+                    "https://imgur.com/4ecZDkM.jpg",
+                    "https://imgur.com/sKIt2AX.jpg",
+                    "https://imgur.com/bzo9jj1.jpg",
+                    "https://imgur.com/PTaVSUg.jpg",
+                    "https://imgur.com/oCsBkY5.jpg",
+                    "https://imgur.com/IBSZhGO.jpg",
+                    "https://imgur.com/mmbQ1jt.jpg",
+                    "https://imgur.com/neJ5VE7.jpg",
+                    "https://imgur.com/DKthr50.jpg",
+                    "https://imgur.com/rnOwYW4.jpg",
+                    "https://imgur.com/pYb5rIP.jpg",
+                    "https://imgur.com/CFMeqkr.jpg",
+                    "https://imgur.com/lobwYmr.jpg",
+                    "https://imgur.com/Qp3reZC.jpg",
+                    "https://imgur.com/DsejLK0.jpg",
+                    "https://imgur.com/L0qw4Gu.jpg",
+                    "https://imgur.com/Vfxz499.jpg",
+                    "https://imgur.com/sdsa755.jpg",
+                    "https://imgur.com/WrQjpyl.jpg",
+                    "https://imgur.com/780Nadn.jpg",
+                    "https://imgur.com/glNa5x6.jpg",
+                    "https://imgur.com/J4bpPMT.jpg",
+                    "https://imgur.com/H9JLwbz.jpg",
+                    "https://imgur.com/O8kgbvB.jpg",
+                    "https://imgur.com/MWgQug8.jpg",
+                    "https://imgur.com/cMsJuwO.jpg",
+                    "https://imgur.com/8Y1xWsg.jpg",
+                    "https://imgur.com/8ysAn2J.jpg",
+                    "https://imgur.com/7zvgTNH.jpg",
+                    "https://imgur.com/2v3FyCX.jpg",
+                    "https://imgur.com/Nb4esrv.jpg",
+                    "https://imgur.com/YjM02qA.jpg",
+                    "https://imgur.com/voljVJC.jpg",
+                    "https://imgur.com/zu06AMf.jpg",
+                    "https://imgur.com/Hi5cc7s.jpg",
+                    "https://imgur.com/CN02Nt9.jpg",
+                    "https://imgur.com/koM9rvv.jpg",
+                    "https://imgur.com/2fPRQSH.jpg",
+                    "https://imgur.com/T5eJ1Gi.jpg",
+                    "https://imgur.com/gkxizyD.jpg",
+                    "https://imgur.com/UxnrLyK.jpg",
+                    "https://imgur.com/vAZr18g.jpg",
+                    "https://imgur.com/E0lMpng.jpg",
+                    "https://imgur.com/vRDMqVd.jpg",
+                    "https://imgur.com/yGIEJcv.jpg",
+                    "https://imgur.com/Pq90KsW.jpg",
+                    "https://imgur.com/HaH7Bqv.jpg",
+                    "https://imgur.com/4aBVBtv.jpg",
+                    "https://imgur.com/NAOfESw.jpg",
+                    "https://imgur.com/rrapvS2.jpg",
+                    "https://imgur.com/EbPRwkh.jpg",
+                    "https://imgur.com/haEPQu6.jpg",
+                    "https://imgur.com/PhFLn72.jpg",
+                    "https://imgur.com/d2zD3N1.jpg",
+                    "https://imgur.com/ZGExeJX.jpg",
+                    "https://imgur.com/ofPhyYv.jpg",
+                    "https://imgur.com/hTf9Xn8.jpg",
+                    "https://imgur.com/VkQPVZ5.jpg",
+                    "https://imgur.com/EtZmI7C.jpg",
+                    "https://imgur.com/VygrQE8.jpg",
+                    "https://imgur.com/TIk24fv.jpg",
+                    "https://imgur.com/Zk2wVle.jpg",
+                    "https://imgur.com/vOTc7IJ.jpg",
+                    "https://imgur.com/ntd5PFW.jpg",
+                    "https://imgur.com/TmlTlFF.jpg",
+                    "https://imgur.com/1oM64BV.jpg",
+                    "https://imgur.com/ybVMf1R.jpg",
+                    "https://imgur.com/8CUbnE9.jpg",
+                    "https://imgur.com/8jvAcF1.jpg",
+                    "https://imgur.com/7fgeqOl.jpg",
+                    "https://imgur.com/BvzP1kd.jpg",
+                    "https://imgur.com/qMJdkoo.jpg",
+                    "https://imgur.com/PiNB8UH.jpg",
+                    "https://imgur.com/vILHFPI.jpg",
+                    "https://imgur.com/SDXnllX.jpg",
+                    "https://imgur.com/OM38bTY.jpg",
+                    "https://imgur.com/iRDn25C.jpg",
+                    "https://imgur.com/MCG22Qj.jpg",
+                    "https://imgur.com/93T2uJE.jpg",
+                    "https://imgur.com/Hn9Em60.jpg",
+                    "https://imgur.com/I7NHMgq.jpg",
+                    "https://imgur.com/IPug3YS.jpg",
+                    "https://imgur.com/CkqPfpJ.jpg",
+                    "https://imgur.com/4nHfu5Y.jpg",
+                    "https://imgur.com/ijPF8zL.jpg",
+                    "https://imgur.com/gSWHyJ6.jpg",
+                    "https://lehel-wrapped.github.io/296.png",
+                    "https://imgur.com/VH4SU3I.jpg",
+                    "https://imgur.com/BxjvH5h.jpg",
+                    "https://imgur.com/khSK4ga.jpg",
+                    "https://imgur.com/G4Q9pPh.jpg",
+                    "https://imgur.com/TzQU5jv.jpg",
+                    "https://imgur.com/A2jv5Om.jpg",
+                    "https://imgur.com/ZG4mphp.jpg",
+                    "https://imgur.com/qlVSIeA.jpg",
+                    "https://imgur.com/QMeT6aR.jpg",
+                    "https://imgur.com/xOAYns9.jpg",
+                    "https://imgur.com/HcYEX7B.jpg",
+                    "https://imgur.com/kag5rpj.jpg",
+                    "https://imgur.com/NrLKJiM.jpg",
+                    "https://imgur.com/VPKHHnD.jpg",
+                    "https://imgur.com/SoYf9mM.jpg",
+                    "https://imgur.com/LMkdTK6.jpg",
+                    "https://imgur.com/ZJYFKaM.jpg",
+                    "https://imgur.com/1ZrjhJL.jpg",
+                    "https://imgur.com/wHYD0Lp.jpg",
+                    "https://imgur.com/oaCiYAP.jpg",
+                    "https://imgur.com/wFvTT52.jpg",
+                    "https://imgur.com/XIZgyIQ.jpg",
+                    "https://imgur.com/Enou809.jpg",
+                    "https://imgur.com/ug2n4oU.jpg",
+                    "https://imgur.com/BvpKGwG.jpg",
+                    "https://imgur.com/bejZjOV.jpg",
+                    "https://imgur.com/fFK9BRf.jpg",
+                    "https://imgur.com/SOtufYB.jpg",
+                    "https://imgur.com/JEX1Mj3.jpg",
+                    "https://imgur.com/VN2hAgQ.jpg",
+                    "https://imgur.com/2OeYWt8.jpg",
+                    "https://imgur.com/UVq9P2C.jpg",
+                    "https://imgur.com/uPrcQYJ.jpg",
+                    "https://imgur.com/YNSodn1.jpg",
+                    "https://imgur.com/0vbDxk6.jpg",
+                    "https://imgur.com/WUmBRdV.jpg",
+                    "https://imgur.com/SGSTTA4.jpg",
+                    "https://imgur.com/nhmCsH6.jpg",
+                    "https://imgur.com/GQA3tcm.jpg",
+                    "https://imgur.com/fMF8yhP.jpg",
+                    "https://imgur.com/UX2rR6Z.jpg",
+                    "https://imgur.com/DnA7tBF.jpg",
+                    "https://imgur.com/KLXC0bh.jpg",
+                    "https://imgur.com/czzx1Y9.jpg",
+                    "https://imgur.com/8Z1XetO.jpg",
+                    "https://imgur.com/I0gs3XQ.jpg",
+                    "https://imgur.com/tL1KHEJ.jpg",
+                    "https://imgur.com/pns0R6k.jpg",
+                    "https://imgur.com/08C5sPp.jpg",
+                    "https://imgur.com/Gs8ux4A.jpg",
+                    "https://imgur.com/33IK2Ek.jpg",
+                    "https://imgur.com/n4xfsK9.jpg",
+                    "https://imgur.com/PXgtnDb.jpg",
+                    "https://imgur.com/VxMdAI8.jpg",
+                    "https://imgur.com/TNKdTaI.jpg",
+                    "https://imgur.com/gFahoIC.jpg",
+                    "https://imgur.com/uA42KzI.jpg",
+                    "https://imgur.com/fdnRJQy.jpg",
+                    "https://imgur.com/LWJZp5X.jpg",
+                    "https://imgur.com/tIgcI42.jpg",
+                    "https://imgur.com/vEVwrhZ.jpg",
+                    "https://imgur.com/LUXF53t.jpg",
+                    "https://imgur.com/43IBASW.jpg",
                 ];
 
                 const texts = [
@@ -1341,6 +1949,351 @@
                     "Not the peppa again",
                     "Ez a gyász nap volt ngl",
                     "",
+                    "Tesi<br>Ezzel már le is zártuk a HARMADIK hetet<br>Szalad az idő",
+                    "Kritikán aluli nap xd",
+                    "Szintén szar nap",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Ezt a rendkivul based napot egy rendkivul based facebook reklammal zarnam",
+                    "",
+                    "Fun fact:<br>A dinók nem felrobbantak a gyászba<br>Én ettem meg őket",
+                    "Szep az ajto<br>🫡",
+                    "Pc reset",
+                    "",
+                    "Goated",
+                    "Magyar xd",
+                    "Word of the day: Oozma Kappa",
+                    "",
+                    "",
+                    "",
+                    "Solo leveling nagyot megy",
+                    "Peppagain",
+                    "",
+                    "",
+                    "(Impresszionista car pic)",
+                    "Not illegible at all",
+                    "",
+                    "",
+                    "Úgy szívjátok fel, mint a tápoldatot",
+                    "Ma is szisszent egy kis nber 🙏",
+                    "",
+                    "",
+                    "Elhagytam a tesi cipomet szval ezzel az antik darabbal kell pótolnom : /",
+                    "Four inch",
+                    "",
+                    "",
+                    "Drip<br>Best thing xd",
+                    "Egyetlen screenem tegnaprol",
+                    "(Megigertem magamnak, h nem felejtek el kepet csinalni)<br>(Elfelejtettem)",
+                    "",
+                    "Kis nosztalgia",
+                    "Ezt meg 3 eve screeneltem<br>Gold",
+                    "Bolond fizika bá bevetesre keszen rakospalotan",
+                    "Hullik a terem",
+                    "Tori fuzet<br>Szetkapom mindjart<br>(Nagyban keszulok a csutortoki vizsgara)<br>((Ket eves anyagbol))<br>(((💀)))",
+                    "Tételek<br>2 óra és megyek felelni",
+                    "",
+                    "Jack's burger top tier<br>Most ettem itt először<br>Nem csalódtam",
+                    "Tegnapi volt a 69<br>És nem küldtem semmit : (",
+                    "Nem tudom, h mi ez<br>De nagyon adja az erőt<br>: D",
+                    "breX1t",
+                    "",
+                    "Final boss",
+                    "Balhézott egy nő, szóval kettő vonat is 10 perces késésbe csúszott",
+                    "",
+                    "",
+                    "Nagy a szar, pixar<br>Nem tanultam holnapra, pedig lett volna boven mit",
+                    "",
+                    "",
+                    "Droid streak",
+                    "",
+                    "Emberünknek az idő nem okoz gondot",
+                    "",
+                    "Elmúlt 2 napban ment a továbbtanulás grind",
+                    "Legrandomabb tokom",
+                    "",
+                    "",
+                    "",
+                    "Most kellett ket utolagos kep",
+                    "Ez mar legit<br>(Abszolut kreativ)<br>((Mar hetek ota igergetek vmi normalisat))",
+                    "Gloves ><br>(Ez meg veletlenul sikerult ilyen igenytelenul)",
+                    "💀💀💀<br>Ezt találtam elsejére xd<br>Szép gondolatok ngl",
+                    "",
+                    "",
+                    "Zoomolni buzis tbh",
+                    "",
+                    "Kis visszafogott tegnapi feggggöny",
+                    "Not the emlegetett szamár again 😣<br>Bolondosan behoztam a lemaradást",
+                    "Szia pajtárs<br>Nagy nap lesz holnap<br>Bolond 100",
+                    "<br><br><br>",
+                    "",
+                    "Ez egy og kep<br>De aznap talaltam meg<br>Kompetencia kozben jot felnevettunk<br>Bolondos kahoot",
+                    "",
+                    "Bs push egesz nap",
+                    "Monitor (no shit)<br>Szinten egesz nap ment a bs push xd",
+                    "Bolondos hatter<br>(Igazgato)<br>[Biggest inside meme]",
+                    "Szallok le nagyban a vonatrol<br>Es mogottem egy srac uvolti, h nagyon szar szag van XD",
+                    "Biosz leakek<br>Es ez meg ki is volt javitva<br>(5os lett :D)",
+                    "Luxus buxus gefi<br>Szep nev<br>(Amugy nagyon jol neznek ki)",
+                    "Ment a trolling egy random classroom csoportban, aminek a kodjad egy elvesztett fuzetben talaltuk<br>Szerencsere goated a tanar, es nem szidott le minket : D<br>Cigany monopoly is volt",
+                    "Merida dual (monitor) thrust",
+                    "Droid kep<br>(Mas nem volt)",
+                    "Ismet dual",
+                    "Fizika egyik resze<br>Penteken feleltem tho, nem korabban<br>Legnagyobb freestyle volt eune<br>Le lettek hozva a csillagok az egrol<br>Szerencsere nem voltam olaj a tuzre (a tanar mar mentalisan a beka segge alatt volt)",
+                    "Birom a ket jeej-s bolondot<br>Es nagyot menne, ha tenyleg csinalnak ilyen videt<br>(My idea btw)",
+                    "Kis reggeli baleset",
+                    "Silas Kosulep<br>Egy 2 ev regebbi feladatott adott fel nekunk a tanar<br>Valakinek a gepen meg megvolt, es elkuldte a tobbsegnek<br>Es szettrolkodtuk az orat<br>Ugy nagyon<br>Best info ora volt eddig ebben az intezmenyben",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Megpróbáltam átmászni a másik fülkébe<br>A sokadik alkalomra elfelejtettem, hogy a wc szélére kellene állnom<br>Ráálltam a közepére<br>Beszakadt a faszomba XD",
+                    "Worst quiality ever 💀<br>Ugy voltam vele, h majd atkuldik az aznapi kepeket<br>De most nincs kedvem keregetni<br>Az a lenyeg, h ballagas kozben vkinek itt ragadt a lufija<br>(Heliumos volt, azert nem latszik)<br>A plafonon van",
+                    "Fúd",
+                    "Meg jo, h volt egy random kepem<br>Probably droid nap volt",
+                    "Kémia ppt<br>(ChatGPT-nek megy a credit a helpert xd)",
+                    "Egesz nap police chase-es videokat neztem<br>Orakon keresztul<br>Es jol esett",
+                    "X1 reggel hatkor tele volt<br>Nem megyek tobbet, az biztos",
+                    "Nem lettem lathatatlan : (",
+                    "Kedvenc utcam(?) Foton<br>Le akartam cutolni egy megallot<br>De ez nem az az idopont volt, amikor sokat vart volna a vonatom<br>Igy feluton mar beelozott<br>Konkluzio: kesobb ertem haza",
+                    "Deep",
+                    "Vakolat mar esik le a legendas kondiban<br>Es durrant egy kis sot<br>Reg szorakoztam ilyen jol 😂",
+                    "Otl be like",
+                    "",
+                    "Csanad a kedvenc gepezetem<br>Megneztem az osszes ig kommetjet<br>Nem rossz<br>Egy fel oraig elvoltam vele",
+                    "Megint le akartam setalni a vonatot<br>(Nem sikerult)",
+                    "Megyek ki az oltozobol, es egy szakitast hallottam<br>Emberunk direkt szetszakitotta a polojat, mert egy sigma G male 💀",
+                    "Hianyzott mar egy olyan phase, amikor felkelek, es csak grindolok egesz nap<br>Sok ido utan ez is eljott<br>Pedig mar hozza sem akartam nyulni semmilyen video gamehez",
+                    "Egy og casa",
+                    "Megint egy olyan nap volt mint tegnap elott<br>Ez a 3napos hetvege ebbol allt<br>Bar most ezt kellett<br>0 mozgas<br>Csak egy kis pihi es zenelgetes",
+                    "\"Lefu Reur\"<br>\"Léza Rabe\"<br>\"Théo Thiste\" (en elozo korben)<br>Ez francia kahoot<br>Es ezek igen humoros francia mondatok<br>(Gyorsan kell kiolvasni :D)",
+                    "Ma nagyot alkottam<br>Sikeresen felhuztam az ofomet<br>Es most utal xd",
+                    "",
+                    "Screenshot",
+                    "Droid streak",
+                    "Búk",
+                    "",
+                    "A mester ismerosoknel",
+                    "",
+                    "",
+                    "Kicsit kifiguraztuk<br>Az igen egyedi fiukat<br>Es insta kepeiket",
+                    "Lenne jobb kep is xd<br>De en erre akarok majd emlekezni ev vegen<br>O egy alter lany 🙏🙏🙏🙏🙏",
+                    "Keszulodesek franciara",
+                    "Virslis prankek meg ilyenek",
+                    "Deutsch-challange 2.0",
+                    "",
+                    "Sracok ahogyan jonnek vissza a mekibol<br>(Nem igazan szabalyos kiruccanas)",
+                    "Szandra coming out<br>Es<br>Zenek progetesa max hangeron egy teremben",
+                    "",
+                    "Ezt csak el kell tenni zsebre",
+                    "Feeling shit<br>Es \"double B\"<br>(Ezt is csak tegyetek zsebre)",
+                    "",
+                    "",
+                    "Ment a gym<br>Es ez a szar jutott eszembe<br>Behaltqm xd",
+                    "",
+                    "",
+                    "Duna bazdmeg xd",
+                    "Epic number again",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Kis X",
+                    "",
+                    "Jo kis esozes",
+                    "Doggy<br>(Pose 💀)",
+                    "",
+                    "",
+                    "Kéne",
+                    "",
+                    "Pew pew",
+                    "",
+                    "",
+                    "Nigelo",
+                    "Imadom ezt a palit<br>(De nem fog atbaszni a programjaval)",
+                    "",
+                    "Nice",
+                    "",
+                    "Szexatya",
+                    "Meg mindig bortokos",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Nagyon szex ez most itt<br>Utolagos javitasok utan megvagyok<br>A padot meg vigyuk mar el, a csavarok csak az esztetikan dobnak xd",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Code lyoko meg ilyenek",
+                    "Valid igau valid<br>Ezt egy kedves osztalytarsamnak kuldom, koszonom",
+                    "The four",
+                    "",
+                    "Én (én)",
+                    "Nig mindenkinek",
+                    "Szex1",
+                    "",
+                    "Szex1",
+                    "",
+                    "Igaz 🔥❤️🙏",
+                    "Only up",
+                    "Jelqmaxxing > (xd)",
+                    "Szex1",
+                    "Ady lore",
+                    "Szex1",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Szex1",
+                    "Last",
+                    "",
+                    "Ez nagyon igaz.💀",
+                    "Kéne egy ilyen",
+                    "",
+                    "",
+                    "KY5",
+                    "",
+                    "",
+                    "",
+                    "Ismet nagyon igem",
+                    "Szex1",
+                    "Not the apex challanges",
+                    "Szex1",
+                    "",
+                    "",
+                    "Uh-la-la-la",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Pakoljál ki<br>Kocsog",
+                    "Hm lore",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Meg mindig varok, Mark",
+                    "Arany oltozeket veszek",
+                    "Hey",
+                    "Gurulgatok",
+                    "Asszem nem lehet bemenni autoval az x1be<br>Nem fix<br>Csak egy megerzes<br>Es nem szamoltam el 🔥🔥🔥",
+                    "",
+                    "",
+                    "",
+                    "Bday type shit",
+                    "Its self explanatory i believe",
+                    "Jeej gang",
+                    "",
+                    "Undesrtandable<br>Have a great day",
+                    "You had better not fuck with the Közlöny gang<br>(Egy ujabb a karakas es csomar utan)",
+                    "Mogger coachman with us",
+                    "Legkozelebb<br>Nem egy 1 nap alatt kellene beseggelnem<br>Eune best feleletem volt tho<br>Csak<br>Na",
+                    "Ermm excuse me<br>Do you know who I am?<br>Nagy flash",
+                    "Mire bukkantam ra veletlenul<br>Mollika ragyogasa",
+                    "Ezt miert ismerte mindenki? 💀",
+                    "Januarig letudva a lab",
+                    "2 het hardcore brainrot kezdodott ezzel a keppel<br>Ez az alfa<br>Es<br>Omega",
+                    "Scarlxrd era mindig visszajon<br>Soha nincs vege<br>Csak szunetel",
+                    "Corto Maltese<br>Bazd<br>Dupla datum lesz<br>Jk<br>Tripla",
+                    "Utolso pillanatok a boss hosszu hajjal<br>Le lett tolva a foldig is",
+                    "Clash Royale grind a tanariban<br>(Vesztettem)<br>((Kicsengettek))",
+                    "Csap nap 💀<br>Legkomolyabb coc beszelgetesek<br>Senki sem nyomja mar tho",
+                    "Asszem ezen a napon ejtettem majdnem valakire a sulyt spotolas kozben<br>No para<br>Korabbiak miatt szntem azt hitte, hogy direkt pusholtam meg ot",
+                    "Tóni",
+                    "",
+                    "",
+                    "",
+                    "JANESCOOO<br>XD<br>Neked matematika<br>Nekem fullos latina 🔥",
+                    "Alannal kiporgott az elso pink",
+                    "Kebab",
+                    "Never back dowm",
+                    "Emeles komoly volt (legyel kicsit kevesbe droid pls lehel🙏🙏🙏)<br>Na viszlat december vegen 🫡<br>Jkjkjk<br>XD",
+                    "vegre megtalaltam ugye meg a nevet, es egy ilyen badass lego postnal volt<br>legendas pull",
+                    "",
+                    "",
+                    "XDDDDDDDDD<br>szep disz",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "a boss",
+                    "reminder",
+                    "megvolt meg<br>eazybe<br>(nem volt easy)",
+                    "",
+                    "",
+                    "",
+                    "valid",
+                    "prezi",
+                    "never again",
+                    "rendesen rontja ez a fekete, de idc at this point<br>tul sok ido lett volna<br>(3p)",
+                    "allapot",
+                    "",
+                    "",
+                    "",
+                    "Nincs jobb, mint 3kor random embiknek zeneket kikeresni",
+                    "",
+                    "",
+                    "",
+                    "3 milka",
+                    "",
+                    "nem mentem",
+                    "sbo",
+                    "flash",
+                    "",
+                    "paran mar nem szalltak vissza",
+                    "a beszelgetesek a 14-esre varva komolyak",
+                    "",
+                    "Fboy Barbie",
+                    "Uj hatter fel ev utan",
+                    "Miguel papa<br>Ez S tier eloadas volt",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Az ev leghosszabb 2 napja<br>Goated volt tho",
+                    "Mas nem volt mvmbmb",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "Sidequesteket nyom a filozofusunk",
+                    "If ykyk",
+                    "Kis meme ev vege fele",
+                    "Egyszer kommenteltem vmit a videojuk ala<br>Ha valaki belikeolta, mindig megneztem ujra<br>Nyar ota ezt a fost kell hallgatnom, mar a szoveget is tudom xd<br>MINDEN HAZUGSAG IDE VEZETETT - 🔥🔥🔥🔥<br>Ez emlekezetes lesz fs<br>Agyverzes",
+                    "En",
+                    "Real",
+                    "XDDDDDDD",
+                    "",
+                    "",
+                    "My drilla",
                 ];
 
                 const carousel = document.getElementById('image-carousel');
@@ -1355,6 +2308,9 @@
                 const imageElements = []; 
                 const frostedElements = []; 
                 let isAnimating = false; 
+                let lastScrollTime = 0;
+                const scrollCooldown = 500;
+
 
                 function initCarousel() {
                     for (let i = 0; i < bufferSize; i++) {
@@ -1442,6 +2398,23 @@
                     }, 500); 
                 }
 
+                window.addEventListener('wheel', (event) => {
+                    const currentTime = Date.now();
+                    if (currentTime - lastScrollTime < scrollCooldown) {
+                        return;
+                    }
+
+                    const viewerContainer = document.querySelector('.image-viewer-container');
+                    if (viewerContainer && getComputedStyle(viewerContainer).display === 'flex') {
+                        if (event.deltaY > 0) {
+                            moveCarousel(1);
+                        } else if (event.deltaY < 0) {
+                            moveCarousel(-1);
+                        }
+                        lastScrollTime = currentTime;
+                    }
+                });
+
                 function goToImage(index) {
                     const targetIndex = Math.max(1, Math.min(images.length, index)) - 1;
                     currentIndex = targetIndex;
@@ -1449,6 +2422,36 @@
                 }
 
                 initCarousel();
+
+//////////VOICE MESSAGE//////////
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const textBox = document.getElementById('text-box');
+                    const message = document.getElementById('message');
+
+                    function updateAudioPlayerDisplay() {
+                        if (message.style.display === 'none') {
+                            audioPlayer.style.display = 'none';
+                        } else if (textBox.innerHTML.trim() === '<br><br><br>') {
+                            audioPlayer.style.display = 'flex';
+                        } else {
+                            audioPlayer.style.display = 'none';
+                        }
+                    }
+
+                    // Update the display whenever necessary
+                    const observer = new MutationObserver(() => {
+                        updateAudioPlayerDisplay();
+                    });
+
+                    observer.observe(textBox, { childList: true, subtree: true });
+                    observer.observe(message, { attributes: true, attributeFilter: ['style'] });
+
+                    // Initial update
+                    updateAudioPlayerDisplay();
+                });
+
+                
     </script>
 </body>
 </html>
