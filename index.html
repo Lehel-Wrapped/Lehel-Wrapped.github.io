@@ -819,22 +819,17 @@
             display: none;
         }
 
-        button.nav-button .svg-fallback {
-            display: none; /* Hide SVG by default */
+        .arrow-icon {
+            font-family: Arial, sans-serif; /* Ensure a font with good Unicode support */
         }
 
-        button.nav-button .unicode-arrow {
-            font-family: Arial, sans-serif; /* Ensure it's rendered by a compatible font */
+        .arrow-icon::after {
+            content: 'V'; /* Fallback if the arrow doesn't render */
+            display: none; /* Hide by default */
         }
 
-        @supports not (font-family: "Arial") {
-            /* If the font fails to render, fallback to SVG */
-            button.nav-button .svg-fallback {
-                display: inline-block;
-            }
-            button.nav-button .unicode-arrow {
-                display: none;
-            }
+        .arrow-icon:empty::after {
+            display: inline; /* Show fallback if arrow fails to render */
         }
     </style>
 </head>
@@ -879,10 +874,7 @@
         <div class="nav-buttons">
             <button class="nav-button up" id="prev-btn" onclick="moveCarousel(-1)">⮝</button>
             <button class="nav-button down" id="next-btn" onclick="moveCarousel(1)">
-                <span class="unicode-arrow">⮟</span>
-                <svg class="svg-fallback" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M1.5 3.5l6 6 6-6" />
-                </svg>
+                <span class="arrow-icon">⮟</span>
             </button>
         </div>
         <div class="frosted" id="frosted-bg"></div>
