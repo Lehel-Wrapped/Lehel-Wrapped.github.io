@@ -819,18 +819,6 @@
             display: none;
         }
 
-        .arrow-icon {
-            font-family: Arial, sans-serif; /* Ensure a font with good Unicode support */
-        }
-
-        .arrow-icon::after {
-            content: 'V'; /* Fallback if the arrow doesn't render */
-            display: none; /* Hide by default */
-        }
-
-        .arrow-icon:empty::after {
-            display: inline; /* Show fallback if arrow fails to render */
-        }
     </style>
 </head>
 <body>
@@ -922,6 +910,27 @@
     <div id="press-start-to-begin" onclick="Start()">INDULÁS</div>
 
     <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const arrowElement = document.querySelector(".arrow-icon");
+
+    // Create a test span element
+    const testSpan = document.createElement("span");
+    testSpan.style.visibility = "hidden"; // Keep it invisible
+    testSpan.style.position = "absolute"; // Prevent layout disruption
+    testSpan.textContent = "⮟"; // Test character
+    document.body.appendChild(testSpan);
+
+    // Compare rendered width
+    if (testSpan.offsetWidth === 0 || testSpan.offsetHeight === 0) {
+        arrowElement.textContent = "V"; // Fallback character
+    }
+
+    // Clean up the test span
+    document.body.removeChild(testSpan);
+});
+
+
         let Button1Timer;
         let Button1Timer2;
         let Button2Timer;
