@@ -22,14 +22,14 @@
 
         @font-face {
             font-family: "GG Sans";
-            src: url('../fonts/GG Sans.ttf') format('opentype');
+            src: url('../fonts/GG Sans.TTF') format('opentype');
             font-weight: normal;
             font-style: normal;
         }
 
         @font-face {
             font-family: "GG Sans";
-            src: url('../fonts/GG Sans Medium.ttf') format('opentype');
+            src: url('../fonts/GG Sans Medium.TTF') format('opentype');
             font-weight: 500;
             font-style: normal;
         }
@@ -818,6 +818,24 @@
             background: transparent;
             display: none;
         }
+
+        button.nav-button .svg-fallback {
+            display: none; /* Hide SVG by default */
+        }
+
+        button.nav-button .unicode-arrow {
+            font-family: Arial, sans-serif; /* Ensure it's rendered by a compatible font */
+        }
+
+        @supports not (font-family: "Arial") {
+            /* If the font fails to render, fallback to SVG */
+            button.nav-button .svg-fallback {
+                display: inline-block;
+            }
+            button.nav-button .unicode-arrow {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -860,7 +878,12 @@
     <div class="image-viewer-container">
         <div class="nav-buttons">
             <button class="nav-button up" id="prev-btn" onclick="moveCarousel(-1)">⮝</button>
-            <button class="nav-button down" id="next-btn" onclick="moveCarousel(1)">⮟</button>
+            <button class="nav-button down" id="next-btn" onclick="moveCarousel(1)">
+                <span class="unicode-arrow">⮟</span>
+                <svg class="svg-fallback" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1.5 3.5l6 6 6-6" />
+                </svg>
+            </button>
         </div>
         <div class="frosted" id="frosted-bg"></div>
         <div id="image-carousel"></div>
@@ -1906,26 +1929,32 @@
                     "https://imgur.com/UX2rR6Z.jpg",
                     "https://imgur.com/DnA7tBF.jpg",
                     "https://imgur.com/KLXC0bh.jpg",
+                    "https://imgur.com/tIgcI42.jpg",
                     "https://imgur.com/czzx1Y9.jpg",
                     "https://imgur.com/8Z1XetO.jpg",
                     "https://imgur.com/I0gs3XQ.jpg",
                     "https://imgur.com/tL1KHEJ.jpg",
+                    "https://imgur.com/vEVwrhZ.jpg",
                     "https://imgur.com/pns0R6k.jpg",
                     "https://imgur.com/08C5sPp.jpg",
                     "https://imgur.com/Gs8ux4A.jpg",
                     "https://imgur.com/33IK2Ek.jpg",
+                    "https://imgur.com/LUXF53t.jpg",
                     "https://imgur.com/n4xfsK9.jpg",
                     "https://imgur.com/PXgtnDb.jpg",
                     "https://imgur.com/VxMdAI8.jpg",
                     "https://imgur.com/TNKdTaI.jpg",
+                    "https://imgur.com/43IBASW.jpg",
                     "https://imgur.com/gFahoIC.jpg",
                     "https://imgur.com/uA42KzI.jpg",
                     "https://imgur.com/fdnRJQy.jpg",
                     "https://imgur.com/LWJZp5X.jpg",
-                    "https://imgur.com/tIgcI42.jpg",
-                    "https://imgur.com/vEVwrhZ.jpg",
-                    "https://imgur.com/LUXF53t.jpg",
-                    "https://imgur.com/43IBASW.jpg",
+                    "https://imgur.com/dImVY5h.jpg",
+                    "https://imgur.com/KlH14xo.jpg",
+                    "https://imgur.com/PtgFFhL.jpg",
+                    "https://imgur.com/LSqmhm4.jpg",
+                    "https://imgur.com/YFLIo9P.jpg",
+                    "https://imgur.com/yufdBZL.jpg",
                 ];
 
                 const texts = [
@@ -2224,8 +2253,7 @@
                     "Alannal kiporgott az elso pink",
                     "Kebab",
                     "Never back dowm",
-                    "Emeles komoly volt (legyel kicsit kevesbe droid pls lehel🙏🙏🙏)<br>Na viszlat december vegen 🫡<br>Jkjkjk<br>XD",
-                    "vegre megtalaltam ugye meg a nevet, es egy ilyen badass lego postnal volt<br>legendas pull",
+                    "Emeles komoly volt (legyel kicsit kevesbe droid pls lehel🙏🙏🙏)<br>Na viszlat december vegen 🫡<br>Jkjkjk<br>XD<br><br>vegre megtalaltam ugye meg a nevet, es egy ilyen badass lego postnal volt<br>legendas pull",
                     "",
                     "",
                     "XDDDDDDDDD<br>szep disz",
@@ -2234,17 +2262,18 @@
                     "",
                     "",
                     "",
+                    "",
                     "a boss",
-                    "reminder",
-                    "megvolt meg<br>eazybe<br>(nem volt easy)",
+                    "reminder<br>megvolt meg<br>eazybe<br>(nem volt easy)",
                     "",
                     "",
                     "",
                     "valid",
                     "prezi",
                     "never again",
-                    "rendesen rontja ez a fekete, de idc at this point<br>tul sok ido lett volna<br>(3p)",
+                    "",
                     "allapot",
+                    "",
                     "",
                     "",
                     "",
@@ -2268,6 +2297,7 @@
                     "",
                     "",
                     "",
+                    "Sidequesteket nyom a filozofusunk",
                     "",
                     "",
                     "",
@@ -2284,7 +2314,6 @@
                     "",
                     "",
                     "",
-                    "Sidequesteket nyom a filozofusunk",
                     "If ykyk",
                     "Kis meme ev vege fele",
                     "Egyszer kommenteltem vmit a videojuk ala<br>Ha valaki belikeolta, mindig megneztem ujra<br>Nyar ota ezt a fost kell hallgatnom, mar a szoveget is tudom xd<br>MINDEN HAZUGSAG IDE VEZETETT - 🔥🔥🔥🔥<br>Ez emlekezetes lesz fs<br>Agyverzes",
