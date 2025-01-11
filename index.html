@@ -861,9 +861,7 @@
     <div class="image-viewer-container">
         <div class="nav-buttons">
             <button class="nav-button up" id="prev-btn" onclick="moveCarousel(-1)">⮝</button>
-            <button class="nav-button down" id="next-btn" onclick="moveCarousel(1)">
-                <span class="arrow-icon">⮟</span>
-            </button>
+            <button class="nav-button down" id="next-btn" onclick="moveCarousel(1)">⮟</button>
         </div>
         <div class="frosted" id="frosted-bg"></div>
         <div id="image-carousel"></div>
@@ -910,27 +908,6 @@
     <div id="press-start-to-begin" onclick="Start()">INDULÁS</div>
 
     <script>
-
-document.addEventListener("DOMContentLoaded", () => {
-    const arrowElement = document.querySelector(".arrow-icon");
-
-    // Create a test span element
-    const testSpan = document.createElement("span");
-    testSpan.style.visibility = "hidden"; // Keep it invisible
-    testSpan.style.position = "absolute"; // Prevent layout disruption
-    testSpan.textContent = "⮟"; // Test character
-    document.body.appendChild(testSpan);
-
-    // Compare rendered width
-    if (testSpan.offsetWidth === 0 || testSpan.offsetHeight === 0) {
-        arrowElement.textContent = "V"; // Fallback character
-    }
-
-    // Clean up the test span
-    document.body.removeChild(testSpan);
-});
-
-
         let Button1Timer;
         let Button1Timer2;
         let Button2Timer;
